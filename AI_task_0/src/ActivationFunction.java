@@ -4,7 +4,10 @@
  */
 public class ActivationFunction {
 	
-	//TODO
+	public double func(double value){
+		
+		//linear function, returns what gets
+		return value;
+	}
 	
-
 }

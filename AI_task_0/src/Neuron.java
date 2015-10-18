@@ -18,10 +18,28 @@ public class Neuron {
 		this.z = 0;
 	}
 	
-	public Neuron(ArrayList x_list, ArrayList weights_list){
-		this.xList = x_list;
-		this.weights = weights_list;
+	public Neuron(ArrayList<Double> weights_list){
+		this.weights = weights_list;	
+	}
+	
+	// learning neuron
+		public double learn(ArrayList<Double> inputs, double output){
+			
+			for (int i = 0; i < inputs.size(); i++) {
+				z += inputs.get(i) * this.weights.get(i);
+			}
+
+			return aFunction.func(z);
+		}
+	
+	// learned neuron
+	public double activate(ArrayList<Double> inputs){
 		
+		for (int i = 0; i < inputs.size(); i++) {
+			z += inputs.get(i) * this.weights.get(i);
+		}
+
+		return aFunction.func(z);
 	}
 
 	// getters and setters
