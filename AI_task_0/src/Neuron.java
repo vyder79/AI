@@ -1,10 +1,6 @@
 import java.util.ArrayList;
 
 /**
- * 
- */
-
-/**
  * @author vyder
  *
  */
