@@ -6,14 +6,28 @@
  */
 public class ActivationFunction {
 	
-	public ActivationFunction() {
-		// TODO Auto-generated constructor stub
+	String function = "";
+	
+	public ActivationFunction(){
+		
+	}
+	
+	public ActivationFunction(String _function) {
+		this.function = _function;
 	}
 	
 	public double func(double value){
 		
 		//linear function, returns what gets
 		return value;
+	}
+
+	public String getFunction() {
+		return function;
+	}
+
+	public void setFunction(String function) {
+		this.function = function;
 	}
 	
 }
