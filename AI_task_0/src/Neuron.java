@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -7,17 +6,13 @@ import java.util.Random;
  *
  */
 public class Neuron {
-	
-	ArrayList<Double> xList = new ArrayList<>();
+	/**  */
 	ArrayList<Double> weights = new ArrayList<>();
 	ActivationFunction aFunction = new ActivationFunction();
-	double z = 0;
 	
 	public Neuron(){
-		this.xList = new ArrayList<>();
 		this.weights = new ArrayList<>();
-		ActivationFunction aFunction = new ActivationFunction();
-		this.z = 0;
+		this.aFunction = new ActivationFunction();
 	}
 	
 	public Neuron(ArrayList<Double> weights_list){
@@ -26,7 +21,7 @@ public class Neuron {
 	
 	// learning neuron
 	public double learn(ArrayList<Double> inputs, double output){
-		
+		double z = 0;
 		for (int i = 0; i < inputs.size(); i++) {
 			z += inputs.get(i) * this.weights.get(i);
 		}
@@ -36,7 +31,7 @@ public class Neuron {
 	
 	// learned neuron
 	public double activate(ArrayList<Double> inputs){
-		
+		double z = 0;
 		for (int i = 0; i < inputs.size(); i++) {
 			z += inputs.get(i) * this.weights.get(i);
 		}
@@ -45,7 +40,11 @@ public class Neuron {
 	}
 	
 	// set random weights at the start of learning
-	public void setRandomWeights(ArrayList<Double> inputData, double output) {
+	public void setRandomWeights(TreningPattern tp) {
+		setRandomWeights(tp.getInputList(), tp.getOutput());
+	}
+	
+	private void setRandomWeights(ArrayList<Double> inputData, double output) {
 		
 		double weightsSum = 0d;
 		int count = inputData.size() - 1;
@@ -61,6 +60,30 @@ public class Neuron {
 		}
 		this.weights.add((output - weightsSum) / inputData.get(count));
 	}
+	
+	// learning using backward error propagation
+	public double backwardErrorPropagation(TreningPattern tp, double epsilon) {
+		return backwardErrorPropagation(tp.getInputList(), tp.getOutput(), epsilon);
+	}
+	
+	private double backwardErrorPropagation(ArrayList<Double> inputs, double output, double epsilon) {
+
+		double errorValue = output - activate(inputs);
+		ArrayList<Double> newWeights = new ArrayList<>();
+
+		for (int i = 0; i < this.weights.size(); i++) {
+			newWeights.add(this.weights.get(i) + (epsilon * errorValue) * inputs.get(i));
+		}
+		
+		this.weights.clear();
+		this.weights = newWeights;
+		
+		if (Test.DEBUG) {
+			System.out.println("errorValue " + Math.abs(errorValue));
+		}
+		
+		return errorValue;
+	}
 
 	
 	// getters and setters
@@ -71,29 +94,13 @@ public class Neuron {
 	public void setWeights(ArrayList<Double> weights) {
 		this.weights = weights;
 	}
-
-	public double getZ() {
-		return z;
-	}
-
-	public void setZ(double z) {
-		this.z = z;
-	}
-
+	
 	public ActivationFunction getaFunction() {
 		return aFunction;
 	}
 
 	public void setaFunction(ActivationFunction aFunction) {
 		this.aFunction = aFunction;
-	}
-
-	public ArrayList<Double> getxList() {
-		return xList;
-	}
-
-	public void setxList(ArrayList<Double> xList) {
-		this.xList = xList;
 	}
 
 }
