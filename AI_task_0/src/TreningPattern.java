@@ -1,10 +1,23 @@
 import java.util.ArrayList;
 
+/**
+ * Class stored trening pattern (list double values for neuron inputs and 
+ * value of output for specified input list)
+ * 
+ * @author vyder
+ *
+ */
 public class TreningPattern {
 	
+	/** list of double values to set for inputs of neuron */
 	ArrayList<Double> inputList = new ArrayList<Double>();
+	
+	/** value of the output for specified input list */
 	double output = 0;
 	
+	/**
+	 * constructors
+	 */
 	public TreningPattern() {
 	}
 	
@@ -13,6 +26,7 @@ public class TreningPattern {
 		this.output = output;
 	}
 
+	// getters and seters
 	public ArrayList<Double> getInputList() {
 		return inputList;
 	}
