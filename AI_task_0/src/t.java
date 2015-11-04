@@ -13,7 +13,8 @@ public class t {
 		
 		rf.readAllLetters(file2);		
 		rf.read(rf.getAllLetters());
-		System.out.println(rf.getInputArray().get(0));
+		System.out.println(rf.getInputArray().get(25).size());
+
 
 	}
 
