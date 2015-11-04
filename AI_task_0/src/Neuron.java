@@ -11,10 +11,13 @@ import java.util.Random;
 public class Neuron {
 	
 	/** list of neuron weights */
-	ArrayList<Double> weights = new ArrayList<>();
+	private ArrayList<Double> weights = new ArrayList<>();
 	
 	/** neuron's activation function */
-	ActivationFunction aFunction = new ActivationFunction();
+	private ActivationFunction aFunction = new ActivationFunction();
+	
+	/** neuron's description */
+	private String description = "...";
 	
 	/** 
 	 * constructors 
@@ -26,6 +29,17 @@ public class Neuron {
 	
 	public Neuron(ArrayList<Double> weights_list){
 		this.weights = weights_list;	
+	}
+	
+	public Neuron(ArrayList<Double> weights_list, String description){
+		this.weights = weights_list;	
+		this.description = description;
+	}
+	
+	public Neuron(ArrayList<Double> weights_list, String description, ActivationFunction aFunction){
+		this.weights = weights_list;	
+		this.description = description;
+		this.aFunction = aFunction;
 	}
 	
 	/**
@@ -91,6 +105,10 @@ public class Neuron {
 		}
 		return errorValue;
 	}
+	
+	public void toStringOut(){
+		System.out.print(this.description + " " + this.weights.toString() + ", ");
+	}
 
 	/**
 	 *  getters and setters
@@ -109,6 +127,14 @@ public class Neuron {
 
 	public void setaFunction(ActivationFunction aFunction) {
 		this.aFunction = aFunction;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
